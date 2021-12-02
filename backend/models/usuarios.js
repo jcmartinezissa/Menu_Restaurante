@@ -5,7 +5,7 @@ const usuariosSchema = new Schema ({
     email: String,
     password : String,
     estado: Number,
-    rol, Number
+    rol: Number
 });
 
 module.exports = model('Usuarios', usuariosSchema);
