@@ -4,8 +4,8 @@ const usuariosSchema = new Schema ({
     nombre: String,
     email: String,
     password : String,
-    estado: Number,
-    rol: Number
+    estado: String,
+    rol: String
 });
 
 module.exports = model('Usuarios', usuariosSchema);
