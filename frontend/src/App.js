@@ -3,6 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import Tarjeta from "./Tarjeta/Tarjeta";
+import Login from "./Login/Login";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="App container">
       <Navbar />
+      <Login />
       <Main />
       {tarjetas.map((tarjeta) => (
         <Tarjeta
