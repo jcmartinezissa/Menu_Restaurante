@@ -1,12 +1,11 @@
 const {Schema, model} = require ('mongoose');
- 
-let Usuario = mongoose.model('usuarios');
-let Menu = mongoose.model('menues');
+ObjectId = Schema.ObjectId;
 
 const pedidosSchema = new Schema ({
-    usuario: String,
+    usuario: ObjectId,
     fecha: Date,
-    menu : String,
+    menu : ObjectId,
+    cantidad: Number,
     estado: String
 });
 

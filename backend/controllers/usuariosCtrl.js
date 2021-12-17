@@ -17,16 +17,21 @@ usuariosCtrl.getUsuarios = async (req, res)=> {
 };
 
 //buscar usuario por nombre
-usuariosCtrl.getUsuario = (Nombre) = async (req, res) => {
+usuariosCtrl.getUsuario = async (req, res) => {
+     let texto = req.params.nombre;
      try {
-       const usuario = await Usuarios.findOne({nombre: Nombre});
-        res.json({usuario});         
-     } catch (error) {
-        console.log('Error: '+error);
-        res.send('Error en la busqueda de usuario');         
-     }
+        const usuario = await Usuarios.findOne({$or: [{'nombre': texto}, {'email': texto}]});
+        if (usuario == null) {
+            res.send('No se encontro el usuario');
+        }else
+        {
+            res.json({usuario});
+        }               
+        
+     } catch (error) {         
+        res.send('Error al realizar la busqueda: '+error);
+     }    
 };
-
 
 //crear nuevo usuario
 usuariosCtrl.createUsuario = async (req, res) => {
@@ -39,14 +44,34 @@ usuariosCtrl.createUsuario = async (req, res) => {
         rol: rol});
     try {          
             await newUsuario.save();
-
-            res.json({mensaje:'Se guardo el Usuario!'})
+            res.json(newUsuario);
     
     } catch (error) {
-
-       console.log('Error al crear el usuario'+error);
-  
+        res.send('Error al crear el usuario'+error);  
     }
+};
+
+//modiifcar usuario por correo
+usuariosCtrl.updateUsuario = async (req, res) => {
+    const correo =  req.params.correo;
+    const {nombre, email, password, estado, rol} = req.body;
+    try {
+      let usuario =  await Usuarios.findOneAndUpdate({email: correo}, {nombre, email, password, estado, rol}, {new: true});         
+      res.json(usuario);              
+    } catch (error) {         
+       res.send('No se pudo actualizar: '+error);
+    } 
+};
+
+//eliminar usuario por correo
+usuariosCtrl.deleteUsuario = async (req, res) => {
+    const correo =  req.params.correo;
+    try {
+      let usuario =  await Usuarios.deleteOne({email: correo});         
+      res.json({mensaje: "usuario eliminado"});              
+    } catch (error) {         
+       res.send('No se pudo eliminar: '+error);
+    } 
 };
 
 module.exports = usuariosCtrl;

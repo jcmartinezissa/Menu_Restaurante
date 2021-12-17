@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const puerto=process.env.PUERTO;
 
-require('./database');
+ require('./database');
 
 async function main(){
     await app.listen (puerto);
