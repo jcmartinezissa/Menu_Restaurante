@@ -1,34 +1,24 @@
 import "./App.css";
 import Navbar from "./Navbar/Navbar";
-import Main from "./Main/Main";
+import Login from "./Login/Login";
+import Registro from "./Registro/Registro";
+import Menus from "./Menus/Menus";
+import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
-import Tarjeta from "./Tarjeta/Tarjeta";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+//import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [tarjetas, setTarjetas] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://61b9389738f69a0017ce5f61.mockapi.io/tarjetas")
-      .then((response) => {
-        console.log(response.data);
-        setTarjetas(response.data);
-      });
-    console.log(tarjetas);
-  }, []);
   return (
-    <div className="App container">
+    <div className="container">
       <Navbar />
-      <Main />
-      {tarjetas.map((tarjeta) => (
-        <Tarjeta
-          img={tarjeta.img}
-          titulo={tarjeta.titulo}
-          detalle={tarjeta.detalle}
-          precio={tarjeta.precio}
-        />
-      ))}
+      <Routes>      
+        <Route exact path='/home' element={<Home />}/>             
+        <Route path="login" element={<Login />} />
+        <Route path="registro" element={<Registro/>}/>
+        <Route path="menus" element={<Menus/>}/>        
+      </Routes>
+      <Login/>
       <Footer />
     </div>
   );
