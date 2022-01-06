@@ -7,6 +7,7 @@ import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
 //import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from "./Dashboard/Dashboard";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route exact path='/home' element={<Home />}/>             
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Registro/>}/>
-        <Route path="menus" element={<Menus/>}/>        
+        <Route path="menu" element={<Menus/>}/>        
+        <Route path="dashboard" element={<Dashboard/>}/>        
       </Routes>
       <Login/>
       <Footer />

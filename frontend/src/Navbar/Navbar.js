@@ -18,6 +18,7 @@ function Navbar() {
               <NavLink className="nav-link" aria-current="page" to ="home">Inicio </NavLink>
               <NavLink className="nav-link" to ="login" data-bs-toggle="modal" data-bs-target="#login" >Iniciar sesión</NavLink>
               <NavLink className="nav-link" to ="menu">Menu</NavLink>
+              <NavLink className="nav-link" to ="dashboard">DashBoard</NavLink>
               <a className="nav-link disabled" href="#">Nosotres!</a>
             </div>
           </div>
