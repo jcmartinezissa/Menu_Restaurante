@@ -1,4 +1,4 @@
-import {ApiMenu} from "../Conexion/Conexion";
+import ApiMenu from "../Conexion/Conexion";
 import Tarjeta from "../Tarjeta/Tarjeta"
 import "./Menus.css";
 
@@ -18,13 +18,11 @@ function Menus() {
                         <option value="2">Carnes</option>
                         <option value="3">Pastas</option>
                         <option value="4">Platos</option>
-                        <option value="5">Hamburguesas</option>
-                        
+                        <option value="5">Hamburguesas</option>                        
                     </select>
                 </div>
             </div>
                <div className= "shadow m-2 p-2">
-                <Tarjeta />
             </div>
         </div>
     );

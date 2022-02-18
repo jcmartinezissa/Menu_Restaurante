@@ -1,29 +1,41 @@
-import { axios } from "axios";
+import axios from "axios";
 import { useState, useEffect } from "react/cjs/react.development";
 
-export function ApiMenu(props){
+function ApiMenu() {
     //tipo, text
     const [Menues, setMenues] = useState([]);
-    let endpoint = '';
 
+    let endpoint = 'http://localhost:4000/api/menus';
 
-    if  (props.tipo ===''){
-        endpoint='http://localhost:4000/api/menus/menu'+ props.text;
-     };    
+    const getMenu = async () => {
+        const response = await axios.get(endpoint);
+        setMenues(response.data.Menu);
+    }
 
-    if  (props.tipo ==='categoria'){
-        endpoint='http://localhost:4000/api/menus/categoria/'+ props.text;
-     };
+    useEffect(() => { getMenu() }, [getMenu]);
 
-    const getMenu = async () => axios.get(endpoint).then((res) =>
-        setMenues(res.data));
-
-    useEffect(() => getMenu(), []);
     return (Menues);
 };
 
-export default function Conexion(props) {
-    <>
-    <ApiMenu id={props.id} />
-    </>    
+function NuevoMenu(props) {
+    const [Nuevo, setNuevo] = useState(null);
+    const datos = {
+        nombre: props.nombre,
+        imagen: props.imagen,
+        estado: props.estado,
+        precio: props.precio,
+        detalle: props.detalle,
+        categoria: props.categoria
+    };
+    
+    const endpoint = 'http://localhost:4000/api/menus/nuevo';
+
+    useEffect(()=>{
+        axios.post(endpoint, {datos})
+        .then(res=>setNuevo(res.data));
+    },[]);
+
+    return (Nuevo);
 };
+
+export default {ApiMenu, NuevoMenu};
